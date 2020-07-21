@@ -1,0 +1,32 @@
+name: autosign
+
+on: 
+    push:
+        branches:
+            - master
+        schedule:
+            - cron: "3 16 * * *"
+jobs:
+    start_sign:
+        name: start_daily_sign
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout
+              uses: actions/checkout@master
+            - name: setup python
+              uses: actions/setup-python@v2
+              with:
+                python-version: '3.x'
+                architecture: 'x64'
+            - name: start acgn.zone signup
+              env:
+                USR: ${{ secrets.USR }}
+                PASS: ${{ secrets.PASS }}
+              run: |
+                echo "Install Dependencies"
+                pip install requests
+                echo "Start sign"
+                python acgn_zone_login.py
+                
+              
+           
