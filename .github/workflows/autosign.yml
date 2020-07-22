@@ -4,8 +4,8 @@ on:
     push:
         branches:
             - master
-        schedule:
-            - cron: "3 16 * * *"
+    schedule:
+        - cron: "3 16 * * *"
 jobs:
     start_sign:
         name: start_daily_sign
